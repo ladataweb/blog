@@ -3,19 +3,24 @@ layout: default
 title: Blog
 ---
 
-<section class="home-hero container narrow">
-  <h1>Blog</h1>
-  <p>Notas sobre datos, Power BI, Fabric, Azure y automatización.</p>
-</section>
-
-<section class="post-list container narrow">
+<section class="post-index">
   {% for post in site.posts %}
-    <article class="post-card">
-      <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-      <p class="post-meta">{{ post.date | date: "%-d %B %Y" }}</p>
-      <div class="excerpt">
+    <article class="post-list-item">
+      <h2 class="post-list-title">
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </h2>
+
+      <p class="post-list-meta">
+        {{ post.date | date: "%-d %B %Y" }}
+      </p>
+
+      <div class="post-list-excerpt">
         {{ post.excerpt }}
       </div>
+
+      <p class="post-list-readmore">
+        <a href="{{ post.url | relative_url }}">Seguir leyendo</a>
+      </p>
     </article>
   {% endfor %}
 </section>

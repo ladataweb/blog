@@ -4,10 +4,34 @@
     {% include head.html %}
   </head>
   <body>
-    {% include header.html %}
-    <main class="site-main">
-      {{ content }}
-    </main>
-    {% include footer.html %}
+    <div class="site-shell">
+      <aside class="site-sidebar">
+        <div class="site-sidebar-inner">
+          <a class="site-brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+
+          <div class="site-social">
+            <a href="https://ladataweb.com.ar" target="_blank" rel="noopener">Web</a>
+            <a href="https://github.com/ibarrau-pi" target="_blank" rel="noopener">GitHub</a>
+          </div>
+          <p class="site-tagline">
+            Blog sobre datos, Power BI, Fabric, Azure y automatización.
+          </p>
+
+          <nav class="site-menu">
+            <a href="{{ '/' | relative_url }}">Inicio</a>
+            <a href="{{ '/archive/' | relative_url }}">Archivo</a>
+            <a href="https://ladataweb.com.ar" target="_blank" rel="noopener">Web principal</a>
+          </nav>
+
+          <div class="site-sidebar-meta">
+            <p>Escribiendo sobre analítica, automatización y plataformas Microsoft.</p>
+          </div>
+        </div>
+      </aside>
+
+      <main class="site-main">
+        {{ content }}
+      </main>
+    </div>
   </body>
 </html>
