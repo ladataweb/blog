@@ -9,9 +9,10 @@ baseurl: "/blog-ladataweb"
 author: Ibarrau
 main_site_url: "https://ladataweb.com.ar"
 
+logo: /assets/images/ldw-logo.png
+
 socials:
-  linkedin: "https://www.linkedin.com/"
-  github: "https://github.com/ibarrau-pi"
-  x: ""
-  instagram: ""
-  email: ""
+  x: "https://x.com/ignacho_07"
+  linkedin: "https://ar.linkedin.com/in/ignacio-barrau-b794b082"
+  github: "https://github.com/ibarrau"
+  subscribe: "https://www.ladataweb.com.ar/contacto.html?id=suscribirse"
