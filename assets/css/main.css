@@ -233,6 +233,12 @@ a:hover {
 .home {
   padding: 0 5em 0 5em;
 }
+.archive {
+  padding: 0 5em 0 5em;
+}
+.article {
+  padding: 0 5em 0 5em;
+}
 
 .home__header,
 .archive__header {
@@ -574,6 +580,12 @@ a:hover {
   }
 
   .home {
+    padding: 0 1em 0 1em;
+  }  
+  .archive {
+    padding: 0 1em 0 1em;
+  }
+  .article {
     padding: 0 1em 0 1em;
   }
 
