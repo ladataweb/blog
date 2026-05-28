@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Cómo organizo imágenes y assets en un blog Jekyll"
-date: 2026-05-21 09:30:00 -0300
+date: 2018-05-21 09:30:00 -0300
+slug: primer-posteo-prueba
 tags:
   - jekyll
   - github-pages
@@ -9,7 +10,7 @@ tags:
 categories:
   - jekyll
 description: "Una guía práctica para organizar media y contenido en un blog Jekyll mantenible."
-image: /assets/uploads/2026/05/mi-nuevo-post/cover.jpg
+image: ../assets/uploads/2026/05/mi-nuevo-post/184410650755.png
 ---
 
 Migrar a Jekyll obliga a tomar una decisión importante: cómo organizar imágenes, posts y layouts sin volver el repositorio inmanejable.
