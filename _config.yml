@@ -1,12 +1,14 @@
 title: La Data Web Blog
 description: Blog personal sobre datos, Power BI, Fabric, Azure y automatización.
 lang: es-AR
-timezone: America/Argentina/Jujuy
+timezone: America/Argentina/Buenos_Aires
 
 url: "https://ladataweb.github.io"
 baseurl: "/blog-ladataweb"
 
-author: Ibarrau
+permalink: /:title/
+
+author: Ignacio Barrau
 main_site_url: "https://ladataweb.com.ar"
 
 logo: /assets/images/ldw-logo.png
