@@ -139,5 +139,152 @@
         }
       })();
     </script>
+
+    <div class="subscribe-modal" id="subscribeModal" aria-hidden="true">
+      <div class="subscribe-modal__backdrop" id="subscribeModalBackdrop"></div>
+
+      <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribeModalTitle">
+        <button class="subscribe-modal__close" id="subscribeModalClose" aria-label="Cerrar">
+          <span></span>
+          <span></span>
+        </button>
+
+        <div class="subscribe-modal__content">
+          <p class="subscribe-modal__eyebrow">Newsletter</p>
+          <h2 class="subscribe-modal__title" id="subscribeModalTitle">Recibí nuevos artículos en tu correo</h2>
+          <p class="subscribe-modal__text">
+            Suscribite para enterarte de nuevas publicaciones, tutoriales y novedades sobre datos, Power BI, Fabric, Azure y automatización.
+          </p>
+
+          <div class="subscribe-form">
+            <label class="subscribe-form__label" for="correo">Correo electrónico</label>
+            <input
+              type="email"
+              id="correo"
+              name="correo"
+              class="subscribe-form__input"
+              placeholder="tu@email.com"
+              autocomplete="email"
+            >
+            <p class="subscribe-form__error" id="subscribeError" hidden>
+              Ingresá un correo electrónico válido.
+            </p>
+
+            <div class="subscribe-form__actions">
+              <button type="button" class="subscribe-form__submit" id="subscribeSubmit">
+                Suscribirme
+              </button>
+              <button type="button" class="subscribe-form__secondary" id="subscribeLater">
+                Ahora no
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var modal = document.getElementById('subscribeModal');
+        var closeBtn = document.getElementById('subscribeModalClose');
+        var laterBtn = document.getElementById('subscribeLater');
+        var submitBtn = document.getElementById('subscribeSubmit');
+        var backdrop = document.getElementById('subscribeModalBackdrop');
+        var emailInput = document.getElementById('correo');
+        var errorText = document.getElementById('subscribeError');
+
+        if (!modal) return;
+
+        var STORAGE_KEY = 'ldw-newsletter-modal-dismissed-v1';
+
+        function isValidEmail(value) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        }
+
+        function openModal() {
+          modal.classList.add('is-open');
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.classList.add('modal-open');
+          setTimeout(function () {
+            if (emailInput) emailInput.focus();
+          }, 50);
+        }
+
+        function closeModal(remember) {
+          modal.classList.remove('is-open');
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.classList.remove('modal-open');
+          if (remember) {
+            try {
+              localStorage.setItem(STORAGE_KEY, '1');
+            } catch (e) {}
+          }
+        }
+
+        function submitSubscription() {
+          var value = (emailInput.value || '').trim();
+
+          if (!isValidEmail(value)) {
+            errorText.hidden = false;
+            emailInput.setAttribute('aria-invalid', 'true');
+            emailInput.focus();
+            return;
+          }
+
+          errorText.hidden = true;
+          emailInput.removeAttribute('aria-invalid');
+
+          if (typeof subscribeMail === 'function') {
+            subscribeMail();
+            try {
+              localStorage.setItem(STORAGE_KEY, '1');
+            } catch (e) {}
+          }
+        }
+
+        closeBtn && closeBtn.addEventListener('click', function () {
+          closeModal(true);
+        });
+
+        laterBtn && laterBtn.addEventListener('click', function () {
+          closeModal(true);
+        });
+
+        backdrop && backdrop.addEventListener('click', function () {
+          closeModal(true);
+        });
+
+        submitBtn && submitBtn.addEventListener('click', function () {
+          submitSubscription();
+        });
+
+        emailInput && emailInput.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            submitSubscription();
+          }
+        });
+
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+            closeModal(true);
+          }
+        });
+
+        window.addEventListener('load', function () {
+          var alreadyDismissed = false;
+          try {
+            alreadyDismissed = localStorage.getItem(STORAGE_KEY) === '1';
+          } catch (e) {}
+
+          var isHome = window.location.pathname === "{{ '/' | relative_url }}" || window.location.pathname === "{{ '/index.html' | relative_url }}";
+
+          if (!alreadyDismissed && isHome) {
+            setTimeout(openModal, 900);
+          }
+        });
+      })();
+    </script>
+
   </body>
 </html>
