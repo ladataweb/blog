@@ -238,10 +238,12 @@ a:hover {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  background: rgba(210,180,140,0.6);
+  text-decoration: underline;
+  /*background: rgba(210,180,140,0.6);*/
 }
 
 .sidebar__nav--bottom a {
+  color:#404040;
   width: auto;
   padding: 0.72rem 1rem;
   text-align: center;
