@@ -223,8 +223,12 @@
             } 
             });				 
           
-          var modal = document.getElementById("myModal");
-          modal.style.display = "none";
+          var modal = document.getElementById("subscribeModal");
+          if (modal) {
+            modal.classList.remove("is-open");
+            modal.setAttribute("aria-hidden", "true");
+            document.body.classList.remove("modal-open");
+          }
         }
 			}
 		</script>
