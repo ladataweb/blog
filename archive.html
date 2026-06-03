@@ -12,42 +12,52 @@ permalink: /archive/
 
   <div class="archive-tools">
     <input id="archive-search" class="archive-tools__search" type="search" placeholder="Buscar por título...">
-    <input id="archive-tag-search" class="archive-tools__search" type="search" placeholder="Buscar tag...">
+
+    <button type="button" class="archive-tools__filter-button" id="openTagFilter">
+      Filtrar por tag
+    </button>
   </div>
 
-  <details class="tag-browser" id="tagBrowser">
-    <summary class="tag-browser__summary">
-      Explorar tags
-      <span class="tag-browser__summary-meta">Ordenados por uso</span>
-    </summary>
-
-    <div class="tag-browser__inner">
-      <div class="tag-browser__header">
-        <h2 class="tag-browser__title">Tags</h2>
-        <button type="button" class="tag-browser__toggle" id="toggleRareTags" aria-expanded="false">
-          Mostrar todos
-        </button>
-      </div>
-
-      <div class="tag-browser__list" id="tagBrowserList">
-        {% for tag in site.tags %}
-          {% assign tag_name = tag[0] %}
-          {% assign tag_posts = tag[1] %}
-          {% assign tag_count = tag_posts | size %}
-          <button
-            type="button"
-            class="tag-chip{% if tag_count == 1 %} tag-chip--rare{% endif %}"
-            data-tag="{{ tag_name | downcase }}"
-            data-count="{{ tag_count }}"
-            {% if tag_count == 1 %}hidden{% endif %}
-          >
-            <span class="tag-chip__name">{{ tag_name | replace: '-', ' ' }}</span>
-            <span class="tag-chip__count">{{ tag_count }}</span>
-          </button>
-        {% endfor %}
-      </div>
+  <div class="tag-filter-panel" id="tagFilterPanel" hidden>
+    <div class="tag-filter-panel__header">
+      <h2 class="tag-filter-panel__title">Buscar por tag</h2>
+      <button type="button" class="tag-filter-panel__close" id="closeTagFilter" aria-label="Cerrar filtro de tags">
+        ×
+      </button>
     </div>
-  </details>
+
+    <div class="tag-filter-panel__controls">
+      <input id="archive-tag-search" class="archive-tools__search" type="search" placeholder="Escribí un tag...">
+      <button type="button" class="tag-filter-panel__toggle" id="toggleRareTags" aria-expanded="false">
+        Mostrar tags de una sola aparición
+      </button>
+    </div>
+
+    <div class="tag-filter-panel__list" id="tagBrowserList">
+      {% for tag in site.tags %}
+        {% assign tag_name = tag[0] %}
+        {% assign tag_posts = tag[1] %}
+        {% assign tag_count = tag_posts | size %}
+        <button
+          type="button"
+          class="tag-chip{% if tag_count == 1 %} tag-chip--rare{% endif %}"
+          data-tag="{{ tag_name | downcase }}"
+          data-count="{{ tag_count }}"
+        >
+          <span class="tag-chip__name">{{ tag_name | replace: '-', ' ' }}</span>
+          <span class="tag-chip__count">{{ tag_count }}</span>
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="archive-active-filters" id="activeFilters" hidden>
+    <span class="archive-active-filters__label">Tag seleccionado:</span>
+    <span class="archive-active-filters__tag" id="activeTagLabel"></span>
+    <button type="button" class="archive-active-filters__clear" id="clearTagFilter">
+      Limpiar filtro
+    </button>
+  </div>
 
   <div class="archive__list" id="archive-list">
     {% for post in site.posts %}
@@ -84,12 +94,19 @@ permalink: /archive/
 <script>
   (function () {
     var searchInput = document.getElementById('archive-search');
+    var openPanelBtn = document.getElementById('openTagFilter');
+    var closePanelBtn = document.getElementById('closeTagFilter');
+    var tagPanel = document.getElementById('tagFilterPanel');
     var tagSearchInput = document.getElementById('archive-tag-search');
-    var archiveItems = Array.prototype.slice.call(document.querySelectorAll('#archive-list .archive__item'));
-    var tagButtons = Array.prototype.slice.call(document.querySelectorAll('#tagBrowserList .tag-chip'));
     var tagBrowserList = document.getElementById('tagBrowserList');
     var toggleRareTagsBtn = document.getElementById('toggleRareTags');
+    var clearTagFilterBtn = document.getElementById('clearTagFilter');
+    var activeFilters = document.getElementById('activeFilters');
+    var activeTagLabel = document.getElementById('activeTagLabel');
     var emptyState = document.getElementById('archiveEmpty');
+
+    var archiveItems = Array.prototype.slice.call(document.querySelectorAll('#archive-list .archive__item'));
+    var tagButtons = Array.prototype.slice.call(document.querySelectorAll('#tagBrowserList .tag-chip'));
 
     var selectedTag = '';
     var showingRareTags = false;
@@ -108,6 +125,18 @@ permalink: /archive/
         });
     }
 
+    function updateActiveFilterBar() {
+      if (!activeFilters || !activeTagLabel) return;
+
+      if (selectedTag) {
+        activeFilters.hidden = false;
+        activeTagLabel.textContent = selectedTag.replace(/-/g, ' ');
+      } else {
+        activeFilters.hidden = true;
+        activeTagLabel.textContent = '';
+      }
+    }
+
     function syncTagVisibility() {
       var tagQuery = normalize(tagSearchInput ? tagSearchInput.value : '');
 
@@ -115,7 +144,7 @@ permalink: /archive/
         var tag = button.getAttribute('data-tag') || '';
         var count = parseInt(button.getAttribute('data-count') || '0', 10);
         var matchesSearch = !tagQuery || tag.indexOf(tagQuery) !== -1;
-        var allowedByCount = showingRareTags || count > 1 || (selectedTag && selectedTag === tag);
+        var allowedByCount = showingRareTags || count > 1 || selectedTag === tag;
 
         button.hidden = !(matchesSearch && allowedByCount);
       });
@@ -141,6 +170,8 @@ permalink: /archive/
       if (emptyState) {
         emptyState.hidden = visibleCount !== 0;
       }
+
+      updateActiveFilterBar();
     }
 
     function setSelectedTag(tag) {
@@ -155,14 +186,31 @@ permalink: /archive/
       applyFilters();
     }
 
+    function openTagPanel() {
+      if (!tagPanel) return;
+      tagPanel.hidden = false;
+      if (tagSearchInput) tagSearchInput.focus();
+    }
+
+    function closeTagPanel() {
+      if (!tagPanel) return;
+      tagPanel.hidden = true;
+    }
+
     if (searchInput) {
       searchInput.addEventListener('input', applyFilters);
     }
 
+    if (openPanelBtn) {
+      openPanelBtn.addEventListener('click', openTagPanel);
+    }
+
+    if (closePanelBtn) {
+      closePanelBtn.addEventListener('click', closeTagPanel);
+    }
+
     if (tagSearchInput) {
-      tagSearchInput.addEventListener('input', function () {
-        syncTagVisibility();
-      });
+      tagSearchInput.addEventListener('input', syncTagVisibility);
     }
 
     tagButtons.forEach(function (button) {
@@ -173,15 +221,24 @@ permalink: /archive/
         } else {
           setSelectedTag(clickedTag);
         }
+        closeTagPanel();
       });
     });
 
     if (toggleRareTagsBtn) {
       toggleRareTagsBtn.addEventListener('click', function () {
         showingRareTags = !showingRareTags;
-        toggleRareTagsBtn.textContent = showingRareTags ? 'Mostrar solo frecuentes' : 'Mostrar todos';
+        toggleRareTagsBtn.textContent = showingRareTags
+          ? 'Ocultar tags de una sola aparición'
+          : 'Mostrar tags de una sola aparición';
         toggleRareTagsBtn.setAttribute('aria-expanded', String(showingRareTags));
         syncTagVisibility();
+      });
+    }
+
+    if (clearTagFilterBtn) {
+      clearTagFilterBtn.addEventListener('click', function () {
+        setSelectedTag('');
       });
     }
 
