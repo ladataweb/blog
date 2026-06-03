@@ -3,8 +3,9 @@ description: Blog comunitario sobre el universo de Data de la mano de Fabric, Po
 lang: es-AR
 timezone: America/Argentina/Buenos_Aires
 
-url: "https://ladataweb.github.io"
-baseurl: "/blog-ladataweb"
+url: "https://blog.ladataweb.com.ar"
+baseurl: ""
+google_analytics_id: "UA-120636676-1"
 
 permalink: /:title/
 excerpt_separator: "<!--more-->"
