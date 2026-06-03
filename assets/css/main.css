@@ -892,7 +892,7 @@ body.modal-open {
   height: 46px;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: rgba(255,255,255,0.82);
+  background: rgba(255, 253, 249, 0.55);
   color: var(--text);
   padding: 0 0.95rem;
   font: inherit;
@@ -915,10 +915,10 @@ body.modal-open {
 .tag-filter-panel {
   margin-bottom: 1.25rem;
   padding: 1rem;
-  border: 1px solid rgba(77, 62, 62, 0.08);
+  border: 1px solid rgba(77, 62, 62, 0.06);
   border-radius: 16px;
-  background: rgba(255,255,255,0.74);
-  box-shadow: 0 10px 24px rgba(34, 24, 16, 0.05);
+  background: transparent;
+  box-shadow: none;
 }
 
 .tag-filter-panel__header {
@@ -960,7 +960,7 @@ body.modal-open {
   padding: 0 0.95rem;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: rgba(255,255,255,0.82);
+  background: rgba(255, 253, 249, 0.55);
   color: var(--text);
   font: inherit;
   font-weight: 600;
