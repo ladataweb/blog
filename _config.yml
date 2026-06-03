@@ -5,7 +5,7 @@ timezone: America/Argentina/Buenos_Aires
 
 url: "https://blog.ladataweb.com.ar"
 baseurl: ""
-google_analytics_id: "UA-120636676-1"
+google_analytics_id: "G-TW2LVHSL50"
 
 permalink: /:title/
 excerpt_separator: "<!--more-->"
