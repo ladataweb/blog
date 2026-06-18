@@ -1,49 +1,106 @@
+---
+layout: null
+permalink: /404.html
+---
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Redireccionando Post...</title>
-    <style>
-        body { background-color: #121212; color: #000000; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; text-align: center; }
-        .container { padding: 3rem; border-radius: 12px; background: wheat; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 450px; width: 90%; border-top: 4px solid #F3A977; }
-        .logo { max-width: 180px; margin-bottom: 2rem; }
-        h1 { color: #000000; font-size: 1.4rem; margin-bottom: 1rem; font-weight: 600; }
-        p { color: #915c1c; line-height: 1.6; font-size: 0.95rem; margin-bottom: 2rem; }
-        .spinner { border: 3px solid rgba(0, 162, 255, 0.1); border-left-color: #915c1c; border-radius: 50%; width: 40px; height: 40px; animation: spin 0.8s linear infinite; margin: 0 auto; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Redireccionando post...</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #000000;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      text-align: center;
+      padding: 1rem;
+    }
+    .container {
+      padding: 3rem;
+      border-radius: 12px;
+      background: wheat;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      max-width: 450px;
+      width: 90%;
+      border-top: 4px solid #F3A977;
+    }
+    .logo {
+      max-width: 180px;
+      margin-bottom: 2rem;
+    }
+    h1 {
+      color: #000000;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    p {
+      color: #915c1c;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+    .spinner {
+      border: 3px solid rgba(0, 162, 255, 0.1);
+      border-left-color: #915c1c;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Replace with your logo URL -->
-        <img src="assets/images/LD-trans.png" alt="LaDataWeb" class="logo">
-        <h1>Redireccionando URL</h1>
-        <p>Estamos con problemas en nuestro host de blogs, redireccionando... <br><strong>Disculpe las molestias.</strong></p>
-        <div class="spinner"></div>
+  <div class="container">
+    <img src="{{ '/assets/images/LD-trans.png' | relative_url }}" alt="LaDataWeb" class="logo">
+    <h1>Redireccionando URL</h1>
+    <p>Estamos buscando la nueva ubicación del artículo...<br><strong>Disculpe las molestias.</strong></p>
+    <div class="spinner"></div>
+  </div>
 
-        <script>
-        const path = window.location.pathname;
-        const targetUrl = "https://ibarrau.tumblr.com" + path;
-        const fallbackUrl = "https://ibarrau.tumblr.com";
+  {% assign tumblr_redirects = site.posts | where_exp: "post", "post.tumblr_id" %}
+  <script>
+    (function () {
+      var path = window.location.pathname || '';
+      var fallbackUrl = 'https://ibarrau.tumblr.com';
+      var siteOrigin = '{{ site.url }}{{ site.baseurl }}';
 
-        async function validateAndRedirect() {
-            try {
-                // Using 'no-cors' to attempt to reach the server
-                const response = await fetch(targetUrl, { mode: 'no-cors' });
-                
-                // In no-cors mode, if the request doesn't throw an error, 
-                // it means the server is reachable.
-                window.location.replace(targetUrl);
-            } catch (error) {
-                // If the fetch fails (network error/404), go to main site
-                console.log("Redirecting to fallback...");
-                window.location.replace(fallbackUrl);
-            }
-        }
+      var tumblrMap = {
+        {% for post in tumblr_redirects %}
+          "{{ post.tumblr_id }}": "{{ post.url | relative_url }}"{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      };
 
-        // Run validation after 1 second to let the UI breathe
-        setTimeout(validateAndRedirect, 1000);
-        </script>
-    </div>
+      function extractTumblrId(urlPath) {
+        var match = urlPath.match(/\/post\/(\d+)(?:\/|$)/i);
+        return match ? match[1] : null;
+      }
+
+      function redirectTo(url) {
+        window.location.replace(url);
+      }
+
+      var tumblrId = extractTumblrId(path);
+
+      if (tumblrId && tumblrMap[tumblrId]) {
+        redirectTo(siteOrigin + tumblrMap[tumblrId]);
+        return;
+      }
+
+      redirectTo('https://ibarrau.tumblr.com' + path);
+    })();
+  </script>
 </body>
 </html>
