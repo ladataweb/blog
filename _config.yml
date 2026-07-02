@@ -25,9 +25,6 @@ paginate: 5
 paginate_path: "/page:num/"
 plugins:
   - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-feed
+  - jekyll-sitemap  
   - jekyll-seo-tag
-
-feed:
-  number: 100
+  - jekyll-feed
