@@ -9,6 +9,8 @@ google_analytics_id: "G-TW2LVHSL50"
 
 permalink: /:title/
 excerpt_separator: "<!--more-->"
+include:
+  - .well-known
 
 author: 
   name: Ignacio Barrau
