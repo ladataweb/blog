@@ -74,7 +74,7 @@ permalink: /404.html
   <script>
     (function () {
       var path = window.location.pathname || '';
-      var fallbackUrl = 'https://ibarrau.tumblr.com';
+      var fallbackUrl = 'https://blog.ladataweb.com.ar';
       var siteOrigin = '{{ site.url }}{{ site.baseurl }}';
 
       var tumblrMap = {
@@ -99,7 +99,7 @@ permalink: /404.html
         return;
       }
 
-      redirectTo('https://ibarrau.tumblr.com' + path);
+      redirectTo(fallbackUrl + path);
     })();
   </script>
 </body>
