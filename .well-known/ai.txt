@@ -5,7 +5,6 @@ Site-URL: https://blog.ladataweb.com.ar
 Attribution: required
 
 [Policy]
-Allow-Training: false
 Allow-Scraping: true
 Allow-Summarization: true
 
