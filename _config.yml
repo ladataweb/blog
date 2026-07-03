@@ -10,16 +10,29 @@ google_analytics_id: "G-TW2LVHSL50"
 permalink: /:title/
 excerpt_separator: "<!--more-->"
 
-author: Ignacio Barrau
+author: 
+  name: Ignacio Barrau
+  email: ibarrau@ladataweb.com.ar
+  twitter: ignacho_07
+  links:
+    - https://www.ladataweb.com.ar
+    - https://x.com/ignacho_07
+    - https://ar.linkedin.com/in/ignacio-barrau-b794b082
+    - https://github.com/ibarrau
+
 main_site_url: "https://ladataweb.com.ar"
 
 logo: /assets/images/ldw-logo.png
 
 socials:
+  name: "LaDataWeb"
   x: "https://x.com/ignacho_07"
   linkedin: "https://ar.linkedin.com/in/ignacio-barrau-b794b082"
   github: "https://github.com/ibarrau"
   subscribe: "https://www.ladataweb.com.ar/contacto.html?id=suscribirse"
+  links:
+    - https://github.com/ladataweb
+    - https://github.com/simplepbi
 
 paginate: 5
 paginate_path: "/page:num/"

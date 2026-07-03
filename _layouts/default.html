@@ -2,6 +2,9 @@
 <html lang="{{ page.lang | default: site.lang | default: 'es-AR' }}">
   <head>
     {% include head.html %}
+    <!-- Esta es la etiqueta debería inyectar todo el JSON-LD de Schema.org -->
+    <meta charset="utf-8">
+    {% seo %}
   </head>
   <body>
     <div class="site">

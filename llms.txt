@@ -1,0 +1,19 @@
+---
+layout: null
+permalink: /llms.txt
+---
+# {{ site.title | default: "La Data Web" }}
+
+> {{ site.description | default: "Artículos en la suite de microsoft data platform en castellano. Fabric, Power Bi o Azure suelen predominar." }}
+
+## Artículos Destacados
+{% for post in site.posts %}
+  {% if post.featured == true %}
+- [{{ site.url }}{{ post.url }}]: {{ post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 120 }}
+  {% endif %}
+{% endfor %}
+
+## Últimas Publicaciones
+{% for post in site.posts limit: 5 %}
+- [{{ site.url }}{{ post.url }}]: {{ post.title }} - Publicado el {{ post.date | date: "%Y-%m-%d" }}
+{% endfor %}

@@ -1,0 +1,17 @@
+# Declaración de políticas de uso para Inteligencia Artificial
+
+Site-Name: La Data Web
+Site-URL: https://blog.ladataweb.com.ar
+Attribution: required
+
+[Policy]
+Allow-Training: false
+Allow-Scraping: true
+Allow-Summarization: true
+
+[Licensing]
+License-Type: CC-BY-NC-4.0
+Attribution-Required: true
+
+[Verification]
+Contact: https://ladataweb.com.ar/
