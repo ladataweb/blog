@@ -1,7 +1,7 @@
 ---
 layout: post
 title: '[PowerBi] Totales de medidas en dos clicks'
-date: 2026-07-21 15:48:00 -0300
+date: 2026-07-15 11:48:00 -0300
 slug: totales-de-medidas-en-dos-clicks
 tags:
 - power bi
