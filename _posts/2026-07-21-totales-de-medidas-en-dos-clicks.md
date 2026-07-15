@@ -1,6 +1,6 @@
 ---
 layout: post
-title: PowerBi Totales de medidas en dos clicks
+title: '[PowerBi] Totales de medidas en dos clicks'
 date: 2026-07-21 15:48:00 -0300
 slug: totales-de-medidas-en-dos-clicks
 tags:
@@ -19,12 +19,12 @@ description: 'Si hay algo que ha perseguido a Power Bi por mucho tiempo, son los
 legacy: true
 tumblr_id: '822221552506535936'
 faqs:
-  - q: ¿Qué es un total personalizado en Power BI?
-    a: Un total personalizado en Power BI es una característica que permite a los usuarios definir cómo se calcula el total de una medida en una tabla o matriz. En lugar de usar la agregación predeterminada, como la suma, los usuarios pueden elegir otras funciones de agregación como promedio, máximo, mínimo, recuento distinto o recuento de filas mostradas.
-  - q: ¿Cómo se puede cambiar el total de una medida en Power BI?
-    a: Para cambiar el total de una medida en Power BI, se puede hacer clic derecho sobre el total en la visualización o sobre el campo de las columnas donde se hace el gráfico, seleccionar "Customize Total" y elegir la agregación deseada (SUM, MAX, MIN, AVERAGE, etc.).
-  - q: ¿Cómo arreglar el total de una medida dax en Power BI?
-    a: Para arreglar el total de una medida DAX en Power BI, se puede hacer clic derecho sobre el total en la visualización o sobre el campo de las columnas donde se hace el gráfico, seleccionar "Customize Total" y elegir la agregación deseada (SUM, MAX, MIN, AVERAGE, etc.).
+  - q: '¿Qué es un total personalizado en Power BI?'
+    a: 'Un total personalizado en Power BI es una característica que permite a los usuarios definir cómo se calcula el total de una medida en una tabla o matriz. En lugar de usar la agregación predeterminada, como la suma, los usuarios pueden elegir otras funciones de agregación como promedio, máximo, mínimo, recuento distinto o recuento de filas mostradas.'
+  - q: '¿Cómo se puede cambiar el total de una medida en Power BI?'
+    a: 'Para cambiar el total de una medida en Power BI, se puede hacer clic derecho sobre el total en la visualización o sobre el campo de las columnas donde se hace el gráfico, seleccionar "Customize Total" y elegir la agregación deseada (SUM, MAX, MIN, AVERAGE, etc.).'
+  - q: '¿Cómo arreglar el total de una medida dax en Power BI?'
+    a: 'Para arreglar el total de una medida DAX en Power BI, se puede hacer clic derecho sobre el total en la visualización o sobre el campo de las columnas donde se hace el gráfico, seleccionar "Customize Total" y elegir la agregación deseada (SUM, MAX, MIN, AVERAGE, etc.).'
 ---
 
 # [PowerBi] Totales de medidas en dos clicks
