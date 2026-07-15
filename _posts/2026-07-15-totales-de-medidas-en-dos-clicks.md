@@ -27,12 +27,10 @@ faqs:
     a: 'Para arreglar el total de una medida DAX en Power BI, se puede hacer clic derecho sobre el total en la visualización o sobre el campo de las columnas donde se hace el gráfico, seleccionar "Customize Total" y elegir la agregación deseada (SUM, MAX, MIN, AVERAGE, etc.).'
 ---
 
-# [PowerBi] Totales de medidas en dos clicks
-
 Si hay algo que ha perseguido a Power Bi por mucho tiempo, son los totales de las medidas. Para mi nunca estuvieron mal, pero no es sencillo explicarle a un usuario final que esa medida super compleja no esta sumando para el total, sino que hace la operación sobre el total.
 
 En este artículo hablamos de la nueva característica de Power Bi que esta sugiriendo acompañar de forma más simple el desarrollo para la experiencia de usuarios.
-
+<!--more-->
 Estoy seguro que alguna vez les pasó que ante una medida complicada el total que mostraba una tabla no era el esperado. Algo similar a la siguiente imagen:
 
 <div class="npf_row"><figure class="tmblr-full" data-orig-height="427" data-orig-width="361"><img src="https://64.media.tumblr.com/80fbf15673e3954aecf17656f6eb3b3a/ba8cbde35daa4687-bb/s400x600/94d1e91e17dcb9cace0fea7be26f160e93c3440d.pnj" data-orig-height="427" data-orig-width="361" srcset="https://64.media.tumblr.com/80fbf15673e3954aecf17656f6eb3b3a/ba8cbde35daa4687-bb/s400x600/94d1e91e17dcb9cace0fea7be26f160e93c3440d.pnj 361w" sizes="(max-width: 361px) 100vw, 361px"></figure></div>
