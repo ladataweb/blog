@@ -57,39 +57,41 @@ Veamos los detalles de las librería.
 
 Importamos objetos
 
-from simplepbi import token<br>
-
+```python
+from simplepbi import token
 from simplepbi.fabric import core
+```
 
 Variables para autenticar y buscar area
 
-TENANT\_ID = "xxxxxx-xxxx-xxxx-xxxx-xxxxxx"<br>
-
-power\_bi\_client\_id = "xxxxxx-xxxx-xxxx-xxxx-xxxxxx"<br>
-
-power\_bi\_secret = ""<br>
-
-workspace\_id = "xxxxxx-xxxx-xxxx-xxxx-xxxxxx"
+```python
+TENANT_ID = "xxxxxx-xxxx-xxxx-xxxx-xxxxxx"
+power_bi_client_id = "xxxxxx-xxxx-xxxx-xxxx-xxxxxx"
+power_bi_secret = ""
+workspace_id = "xxxxxx-xxxx-xxxx-xxxx-xxxxxx"
+```
 
 Crear objetos
 
-t = token.Token(TENANT\_ID,power\_bi\_client\_id,None,None,power\_bi\_secret,use\_service\_principal=True)<br>
-
-it = core.Items(t.token)<br>
-
+```python
+t = token.Token(TENANT_ID,power_bi_client_id,None,None,power_bi_secret,use_service_principal=True)
+it = core.Items(t.token)
 job = core.Scheduler(t.token)
+```
 
 Obtener los items del area de trabajo
 
-notebooks\_resp = it.list\_items(workspace\_id, type="Notebook")<br>
-
-pipelines\_resp = it.list\_items(workspace\_id, type="DataPipeline")
+```python
+notebooks_resp = it.list_items(workspace_id, type="Notebook")
+pipelines_resp = it.list_items(workspace_id, type="DataPipeline")
+```
 
 Ejemplo de como obtener schedules o instancias
 
-job.list\_item\_schedules(workspace\_id, item\_id, "RunNotebook", False)<br>
-
-job.list\_item\_job\_instances(workspace\_id, item\_id)
+```python
+job.list_item_schedules(workspace_id, item_id, "RunNotebook", False)
+job.list_item_job_instances(workspace_id, item_id)
+```
 
 Con esas simples líneas podemos obtener los datos deseados. Luego cada quien puede procesarlos como guste. En mi caso, elegí procesar las instancias con un mensaje de fallo en caso que lo haya y los schedules mostrando uno por tiempo configurado. El código puede correrse desde Fabric notebook y hay una celda para usar pandas u otra para usar spark frame.
 
