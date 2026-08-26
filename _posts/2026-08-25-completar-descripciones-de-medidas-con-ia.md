@@ -47,19 +47,15 @@ Antes ejecutabamos un Script de C# llamando una IA. Ahora vamos a ir por un lige
 
 Comencemos obteniendo nuestro json con la información de medidas. Abrimos la vista de consultas DAX y ejecutamos lo siguiente:
 
-EVALUATE { <br>
-
- TOJSON(<br>
-
- SELECTCOLUMNS(<br>
-
- INFO.VIEW.MEASURES(), "Table", [Table], "Name", [Name], "Expression", [Expression], "DataType", [DataType]<br>
-
- ),-1<br>
-
- ) <br>
-
+```
+EVALUATE {
+ TOJSON(
+ SELECTCOLUMNS(
+ INFO.VIEW.MEASURES(), "Table", [Table], "Name", [Name], "Expression", [Expression], "DataType", [DataType]
+ ),-1
+ ) 
 }
+```
 
 Veremos una devolución algo así:
 
