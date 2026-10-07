@@ -119,15 +119,11 @@ La autenticación podría resolverse mediante una app registration, con Client I
 Con esto Azure le asigna una identidad propia al recurso. En el código se utiliza DefaultAzureCredential, por lo que cuando corre en Azure toma automáticamente esa identidad y solicita un token para Fabric.
 
 ```python
-**From azure.identity import DefaultAzureCredential <br>
+from azure.identity import DefaultAzureCredential
 
-credential = DefaultAzureCredential() <br>
+credential = DefaultAzureCredential() 
 
-token = credential.get\_token( <br>
-
- “https:**//api.fabric.microsoft.com/.default” <br>
-
-).token
+token = credential.get_token("https://api.fabric.microsoft.com/.default").token
 ```
 
 **Dar permiso a esa identidad dentro de Fabric**
@@ -172,7 +168,7 @@ Para la prueba se configuró la Function con AuthLevel.FUNCTION. Esto obliga a e
 
 La clave es que esa Function Key solo controla el acceso al endpoint de la Function. La conexión entre la Function y Fabric se autentica por separado, usando Entra ID y Managed Identity.
 
-> _https://<function-app>.azurewebsites.net/api/exportaciones/resumen?code=<function-key>_
+> _https://[function-app].azurewebsites.net/api/exportaciones/resumen?code=[function-key]_
 
 ## **Conclusión**
 
