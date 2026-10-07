@@ -118,9 +118,8 @@ La autenticación podría resolverse mediante una app registration, con Client I
 
 Con esto Azure le asigna una identidad propia al recurso. En el código se utiliza DefaultAzureCredential, por lo que cuando corre en Azure toma automáticamente esa identidad y solicita un token para Fabric.
 
+```python
 **From azure.identity import DefaultAzureCredential <br>
-
-<br>
 
 credential = DefaultAzureCredential() <br>
 
@@ -129,6 +128,7 @@ token = credential.get\_token( <br>
  “https:**//api.fabric.microsoft.com/.default” <br>
 
 ).token
+```
 
 **Dar permiso a esa identidad dentro de Fabric**
 
@@ -172,7 +172,7 @@ Para la prueba se configuró la Function con AuthLevel.FUNCTION. Esto obliga a e
 
 La clave es que esa Function Key solo controla el acceso al endpoint de la Function. La conexión entre la Function y Fabric se autentica por separado, usando Entra ID y Managed Identity.
 
-> *https://<function-app>.azurewebsites.net/api/exportaciones/resumen?code=<function-key>*
+> _https://<function-app>.azurewebsites.net/api/exportaciones/resumen?code=<function-key>_
 
 ## **Conclusión**
 
@@ -185,7 +185,7 @@ La prueba permitió validar la posibilidad de mantener el dato dentro de Microso
 
 <!-- -->
 
-*Escrito por<br>
+_Escrito por_<br>
 
-**[Nazarena Tossolini](<https://www.linkedin.com/in/nazarenatossolini/>)*
+_[Nazarena Tossolini](<https://www.linkedin.com/in/nazarenatossolini/>)_
 
